@@ -1,0 +1,261 @@
+{
+  "metadata": {
+    "engine": "AttackSurfaceMonitoring (ASM) Suite v2.0",
+    "author": "Ajit Nayak (SOC / Threat Recon)",
+    "timestamp": "2026-09-28T14:30:00Z",
+    "targets": [
+      "corp-enterprise-demo.io",
+      "api-gateway-mesh.net",
+      "dev-portal.internal-staging.io"
+    ],
+    "scanned_ports": [21, 22, 23, 25, 53, 80, 110, 143, 443, 445, 1433, 1521, 3306, 3389, 5432, 5900, 6379, 8000, 8080, 8443, 8888, 9200, 27017],
+    "threads": 25,
+    "scan_duration_seconds": 14.82
+  },
+  "summary": {
+    "total_targets": 3,
+    "discovered_subdomains": 18,
+    "live_hosts": 4,
+    "total_open_ports": 9,
+    "critical_vulnerabilities": 2,
+    "high_vulnerabilities": 2,
+    "medium_vulnerabilities": 3,
+    "low_vulnerabilities": 4,
+    "overall_risk_score": 78.5,
+    "risk_rating": "CRITICAL"
+  },
+  "assets": [
+    {
+      "hostname": "api.corp-enterprise-demo.io",
+      "ip_addresses": ["198.51.100.42"],
+      "primary_ip": "198.51.100.42",
+      "cnames": ["api-prod.trafficmanager.net"],
+      "reverse_ptr": "lb-node-42.corp-enterprise-demo.io",
+      "dangling_dns": null,
+      "open_ports": [
+        {"port": 80, "service": "HTTP", "state": "OPEN"},
+        {"port": 443, "service": "HTTPS", "state": "OPEN"}
+      ],
+      "http_banner": {
+        "url": "https://api.corp-enterprise-demo.io",
+        "protocol": "https",
+        "status_code": 200,
+        "server": "nginx/1.18.0",
+        "x_powered_by": "Express",
+        "title": "Enterprise API Gateway Dashboard",
+        "security_headers": {
+          "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+          "X-Content-Type-Options": "nosniff"
+        },
+        "missing_security_headers": [
+          "Content-Security-Policy",
+          "X-Frame-Options",
+          "Permissions-Policy"
+        ],
+        "technology_fingerprints": ["Server: nginx/1.18.0", "Tech: Express", "Swagger/OpenAPI Docs"]
+      },
+      "ssl_certificate": {
+        "subject_cn": "api.corp-enterprise-demo.io",
+        "issuer_cn": "Let's Encrypt Authority X3",
+        "not_before": "Jun 20 00:00:00 2026 GMT",
+        "not_after": "Oct 02 12:00:00 2026 GMT",
+        "days_remaining": 4,
+        "is_expired": false,
+        "sans": ["api.corp-enterprise-demo.io", "gateway.corp-enterprise-demo.io"],
+        "tls_version": "TLSv1.3",
+        "cipher_suite": "TLS_AES_256_GCM_SHA384"
+      },
+      "risk_score": 35.0,
+      "findings_count": 3,
+      "risk_level": "MEDIUM"
+    },
+    {
+      "hostname": "dev-cache.internal-staging.io",
+      "ip_addresses": ["203.0.113.88"],
+      "primary_ip": "203.0.113.88",
+      "cnames": [],
+      "reverse_ptr": "staging-redis-node.cloudapp.net",
+      "dangling_dns": null,
+      "open_ports": [
+        {"port": 6379, "service": "Redis", "state": "OPEN"},
+        {"port": 22, "service": "SSH", "state": "OPEN"}
+      ],
+      "http_banner": null,
+      "ssl_certificate": null,
+      "risk_score": 50.0,
+      "findings_count": 2,
+      "risk_level": "HIGH"
+    },
+    {
+      "hostname": "legacy-blog.corp-enterprise-demo.io",
+      "ip_addresses": ["192.0.2.115"],
+      "primary_ip": "192.0.2.115",
+      "cnames": ["corp-enterprise-blog.ghost.io"],
+      "reverse_ptr": "edge-proxy.ghost.io",
+      "dangling_dns": {
+        "service": "Ghost Blog",
+        "cname_target": "corp-enterprise-blog.ghost.io",
+        "signature": "ghost.io"
+      },
+      "open_ports": [
+        {"port": 80, "service": "HTTP", "state": "OPEN"}
+      ],
+      "http_banner": {
+        "url": "http://legacy-blog.corp-enterprise-demo.io",
+        "protocol": "http",
+        "status_code": 404,
+        "server": "openresty",
+        "x_powered_by": null,
+        "title": "Ghost - Site Not Found",
+        "security_headers": {},
+        "missing_security_headers": [
+          "Strict-Transport-Security",
+          "Content-Security-Policy",
+          "X-Frame-Options",
+          "X-Content-Type-Options"
+        ],
+        "technology_fingerprints": ["Server: openresty"]
+      },
+      "ssl_certificate": null,
+      "risk_score": 50.0,
+      "findings_count": 4,
+      "risk_level": "HIGH"
+    },
+    {
+      "hostname": "database-edge.api-gateway-mesh.net",
+      "ip_addresses": ["198.51.100.201"],
+      "primary_ip": "198.51.100.201",
+      "cnames": [],
+      "reverse_ptr": "db-node-primary.api-gateway-mesh.net",
+      "dangling_dns": null,
+      "open_ports": [
+        {"port": 3306, "service": "MySQL", "state": "OPEN"},
+        {"port": 27017, "service": "MongoDB", "state": "OPEN"},
+        {"port": 3389, "service": "RDP", "state": "OPEN"},
+        {"port": 443, "service": "HTTPS", "state": "OPEN"}
+      ],
+      "http_banner": {
+        "url": "https://database-edge.api-gateway-mesh.net",
+        "protocol": "https",
+        "status_code": 200,
+        "server": "Apache/2.4.41 (Ubuntu)",
+        "x_powered_by": "PHP/7.4.3",
+        "title": "phpMyAdmin Database Management",
+        "security_headers": {},
+        "missing_security_headers": [
+          "Strict-Transport-Security",
+          "Content-Security-Policy",
+          "X-Frame-Options",
+          "X-Content-Type-Options"
+        ],
+        "technology_fingerprints": ["Server: Apache/2.4.41 (Ubuntu)", "Tech: PHP/7.4.3"]
+      },
+      "ssl_certificate": {
+        "subject_cn": "database-edge.api-gateway-mesh.net",
+        "issuer_cn": "Let's Encrypt Authority X3",
+        "not_before": "Jan 10 00:00:00 2026 GMT",
+        "not_after": "Apr 10 00:00:00 2026 GMT",
+        "days_remaining": -171,
+        "is_expired": true,
+        "sans": ["database-edge.api-gateway-mesh.net"],
+        "tls_version": "TLSv1.2",
+        "cipher_suite": "ECDHE-RSA-AES256-GCM-SHA384"
+      },
+      "risk_score": 100.0,
+      "findings_count": 8,
+      "risk_level": "CRITICAL"
+    }
+  ],
+  "findings": [
+    {
+      "id": "ASM-database-edge.api-gateway-mesh.net-PORT-3306",
+      "asset": "database-edge.api-gateway-mesh.net",
+      "type": "Exposed Service",
+      "title": "MySQL Database Exposed",
+      "severity": "CRITICAL",
+      "mitre_technique": "T1595.001",
+      "description": "Port 3306 is publicly accessible from the perimeter, violating network segregation and exposing DB authentication endpoints.",
+      "remediation": "Restrict port 3306 behind an internal VPN, bastion host, or security group whitelist."
+    },
+    {
+      "id": "ASM-database-edge.api-gateway-mesh.net-PORT-27017",
+      "asset": "database-edge.api-gateway-mesh.net",
+      "type": "Exposed Service",
+      "title": "MongoDB Database Exposed",
+      "severity": "CRITICAL",
+      "mitre_technique": "T1595.001",
+      "description": "Port 27017 is accessible over public WAN. Unauthenticated or weak credential instances risk ransomware tampering.",
+      "remediation": "Bind MongoDB to 127.0.0.1 and enforce TLS with mutual certificate authentication."
+    },
+    {
+      "id": "ASM-dev-cache.internal-staging.io-PORT-6379",
+      "asset": "dev-cache.internal-staging.io",
+      "type": "Exposed Service",
+      "title": "Redis In-Memory Database Exposed",
+      "severity": "CRITICAL",
+      "mitre_technique": "T1595.001",
+      "description": "Port 6379 is publicly exposed without firewall ACLs, permitting unauthenticated RCE via CONFIG SET or unauthorized key dump.",
+      "remediation": "Configure 'bind 127.0.0.1', enable 'protected-mode yes', and set strong 'requirepass' authentication."
+    },
+    {
+      "id": "ASM-database-edge.api-gateway-mesh.net-SSL-EXPIRED",
+      "asset": "database-edge.api-gateway-mesh.net",
+      "type": "Certificate Expiration",
+      "title": "SSL/TLS Certificate is Expired",
+      "severity": "CRITICAL",
+      "mitre_technique": "T1596.004",
+      "description": "The SSL certificate expired 171 days ago. Visitors and API clients encounter security warning barriers.",
+      "remediation": "Renew and bind a valid TLS certificate from an authorized CA immediately."
+    },
+    {
+      "id": "ASM-database-edge.api-gateway-mesh.net-PORT-3389",
+      "asset": "database-edge.api-gateway-mesh.net",
+      "type": "Exposed Service",
+      "title": "RDP (Remote Desktop) Exposed to Public Internet",
+      "severity": "HIGH",
+      "mitre_technique": "T1595.001",
+      "description": "RDP port 3389 is exposed externally, creating risk of brute-force password spraying and BlueKeep style exploitation.",
+      "remediation": "Place RDP behind an Azure Bastion / VPN gateway with Multi-Factor Authentication (MFA)."
+    },
+    {
+      "id": "ASM-api.corp-enterprise-demo.io-SSL-IMMINENT-EXPIRY",
+      "asset": "api.corp-enterprise-demo.io",
+      "type": "Certificate Expiration",
+      "title": "SSL/TLS Certificate Expiring in 4 Days",
+      "severity": "HIGH",
+      "mitre_technique": "T1596.004",
+      "description": "Certificate expires in 4 days. Production API outage risk is imminent without automated renewal.",
+      "remediation": "Trigger automated ACME / Let's Encrypt renewal or deploy updated enterprise certificate."
+    },
+    {
+      "id": "ASM-legacy-blog.corp-enterprise-demo.io-DANGLING-DNS",
+      "asset": "legacy-blog.corp-enterprise-demo.io",
+      "type": "Subdomain Takeover",
+      "title": "Dangling CNAME Record Pointing to Ghost Blog",
+      "severity": "HIGH",
+      "mitre_technique": "T1584.004",
+      "description": "CNAME pointer 'corp-enterprise-blog.ghost.io' matches Ghost Blog fingerprint. If unclaimed, an adversary can register the resource and hijack the subdomain.",
+      "remediation": "Delete the dangling DNS CNAME record or claim the underlying Ghost Blog resource."
+    },
+    {
+      "id": "ASM-api.corp-enterprise-demo.io-MISSING-CSP",
+      "asset": "api.corp-enterprise-demo.io",
+      "type": "Security Header",
+      "title": "Missing Content-Security-Policy (CSP)",
+      "severity": "LOW",
+      "mitre_technique": "T1595.002",
+      "description": "No CSP header detected, increasing vulnerability to Cross-Site Scripting (XSS) and data injection.",
+      "remediation": "Implement a restrictive Content-Security-Policy header defining trusted script/resource origins."
+    },
+    {
+      "id": "ASM-database-edge.api-gateway-mesh.net-INFO-DISCLOSURE",
+      "asset": "database-edge.api-gateway-mesh.net",
+      "type": "Information Disclosure",
+      "title": "Server Banner & Version Leaking",
+      "severity": "INFO",
+      "mitre_technique": "T1595.002",
+      "description": "Server banner disclosed technical stack: Apache/2.4.41 (Ubuntu) PHP/7.4.3.",
+      "remediation": "Disable 'ServerTokens Prod' or strip X-Powered-By / Server response headers in reverse proxy."
+    }
+  ]
+}

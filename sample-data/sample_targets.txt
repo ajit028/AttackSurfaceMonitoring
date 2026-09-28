@@ -1,0 +1,18 @@
+# Attack Surface Monitoring - Sample Enterprise Target Scope
+# Author: Ajit Nayak (ajit028)
+# Environment: External Perimeter Reconnaissance
+
+# Primary Corporate Root Domains
+corp-enterprise-demo.io
+api-gateway-mesh.net
+
+# Cloud & Staging Endpoints
+dev-portal.internal-staging.io
+auth-sso.fintech-platform.org
+payment-processor-edge.net
+redis-cluster-dev.cloudapp.net
+
+# Legacy / Infrastructure Testing Nodes
+vpn-gateway.apac-region.net
+jenkins-ci.corp-enterprise-demo.io
+elastic-cluster.devops-hub.io
